@@ -5,9 +5,9 @@ import ShowTimeUser from './components/ShowTimeUser';
 
 const App = () => {
   return (
-    <div className="flex justify-center items-center h-screen bg-[#F6DCAC]">
-      <About />
-      <SetTimeUser />
+    <div className="flex justify-center items-center h-full bg-[#F6DCAC]">
+      {/* <About />
+      <SetTimeUser /> */}
       <ShowTimeUser />
     </div>
   );

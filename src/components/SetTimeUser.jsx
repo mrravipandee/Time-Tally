@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const SetTimeUser = () => {
+const SetTimeUser = ({ onSubmit }) => {
   const [clicked, setClicked] = useState(false);
   const [errors, setErrors] = useState({ name: "", date: "", description: "" });
 
@@ -50,6 +50,7 @@ const SetTimeUser = () => {
       event.target.reset();
 
       handleClick();
+      onSubmit(); // Notify parent component to move to next stage
     }
   };
 
