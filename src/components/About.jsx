@@ -4,10 +4,22 @@ import { IoArrowRedo } from "react-icons/io5";
 const About = ({ onAccept }) => {
   const [clicked, setClicked] = useState(false);
   const [greek, setGreek] = useState('');
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    // Check if the user is new when the component mounts
+    const newUser = JSON.parse(localStorage.getItem('newUser'));
+    if (newUser === null || newUser === true) {
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
+  }, []);
 
   const handleClick = () => {
     setClicked(true);
-    localStorage.setItem('hasAccepted', true);
+    localStorage.setItem('newUser', JSON.stringify(false));
+    setIsVisible(false);
     onAccept(); // Notify parent component to move to next stage
   };
 
@@ -31,7 +43,11 @@ const About = ({ onAccept }) => {
 
   useEffect(() => {
     handleGreek();
-  }, []); // Run only once on component mount
+  }, []);
+
+  if (!isVisible) {
+    return null;
+  }
 
   return (
     <div className="bg-gray-100 p-4 md:p-6 rounded-lg shadow-md font-poppins max-w-screen-md m-6">

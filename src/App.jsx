@@ -8,8 +8,8 @@ const App = () => {
   return (
     <div className="h-full bg-[#F6DCAC]">
       <div className="flex justify-center items-center">
-        {/* <About />
-      <SetTimeUser /> */}
+        <About />
+        <SetTimeUser />
         <ShowTimeUser />
       </div>
       <Footer />

@@ -1,8 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const SetTimeUser = ({ onSubmit }) => {
   const [clicked, setClicked] = useState(false);
   const [errors, setErrors] = useState({ name: "", date: "", description: "" });
+  const [shouldShowForm, setShouldShowForm] = useState(true);
+
+  useEffect(() => {
+    const checkForAchievements = () => {
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        const achievement = JSON.parse(localStorage.getItem(key));
+        if (achievement && achievement.name && achievement.date) {
+          setShouldShowForm(false);
+          return;
+        }
+      }
+      setShouldShowForm(true);
+    };
+
+    checkForAchievements();
+  }, []);
 
   const handleClick = () => {
     setClicked(true);
@@ -53,6 +70,10 @@ const SetTimeUser = ({ onSubmit }) => {
       onSubmit(); // Notify parent component to move to next stage
     }
   };
+
+  if (!shouldShowForm) {
+    return null;
+  }
 
   return (
     <div className="flex justify-center items-center min-h-screen">

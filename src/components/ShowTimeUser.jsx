@@ -22,16 +22,17 @@ const ShowTimeUser = () => {
   }, []);
 
   useEffect(() => {
-    // Update achievements whenever the achievements state changes
     fetchAchievements();
-  }, [achievements]); // This effect depends on the achievements state
+  }, [achievements]);
 
   const fetchAchievements = () => {
     const storedAchievements = [];
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
       const achievement = JSON.parse(localStorage.getItem(key));
-      storedAchievements.push({ id: key, ...achievement });
+      if (achievement && achievement.name && achievement.date && achievement.description) {
+        storedAchievements.push({ id: key, ...achievement });
+      }
     }
     setAchievements(storedAchievements);
   };
